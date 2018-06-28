@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+#get it from https://github.com/gettalong/hexapdf/
+#https://www.rubydoc.info/stdlib/fileutils
 require 'hexapdf'
 require 'fileutils'
 current_dir=Dir.pwd # => Returns the current directory.
@@ -26,4 +28,5 @@ file=(File.basename(Dir.getwd)).to_s+".pdf"
 doc.write(file)
 FileUtils.mv file, current_dir
 FileUtils.cd current_dir 
+FileUtils.remove_dir(dir, force = false)
 end
