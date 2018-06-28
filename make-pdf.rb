@@ -7,13 +7,19 @@ require 'rubygems'
 require 'zip'
 current_dir=Dir.pwd # => Returns the current directory.
 Dir.glob("*.zip").each do |unzip|
+#puts unzip
 Zip::File.open(unzip) do |zip_file| #in the loop set the zip here 
 zip_file.each do |f|
-f_path = File.join(File.basename(unzip), f.name) #set the zip.basename here
+#puts f
+loc =current_dir+"/"+File.basename(unzip, File.extname(unzip))
+#puts loc
+f_path = File.join(loc , f.name) #set the zip.basename here
+#puts f_path
 FileUtils.mkdir_p(File.dirname(f_path))
 f.extract(f_path) 
 end
 end
+FileUtils.remove(unzip)
 end
 puts dir
 Dir.glob("*").select {|f| File.directory?(f) }.each do |dir|
