@@ -3,7 +3,19 @@
 #https://www.rubydoc.info/stdlib/fileutils
 require 'hexapdf'
 require 'fileutils'
+require 'rubygems'
+require 'zip'
 current_dir=Dir.pwd # => Returns the current directory.
+Dir.glob("*.zip").each do |unzip|
+Zip::File.open(unzip) do |zip_file| #in the loop set the zip here 
+zip_file.each do |f|
+f_path = File.join(File.basename(unzip), f.name) #set the zip.basename here
+FileUtils.mkdir_p(File.dirname(f_path))
+f.extract(f_path) 
+end
+end
+end
+puts dir
 Dir.glob("*").select {|f| File.directory?(f) }.each do |dir|
 puts dir
 FileUtils.cd dir
