@@ -21,7 +21,6 @@ end
 end
 FileUtils.remove(unzip)
 end
-puts dir
 Dir.glob("*").select {|f| File.directory?(f) }.each do |dir|
 puts dir
 FileUtils.cd dir
